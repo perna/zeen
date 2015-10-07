@@ -41,14 +41,9 @@ exports.updateUser = function(req, res, next) {
   user.
     findById(req.params['id'])
       .then(function(u){
-        if(typeof req.params['full_name'] !== "undefined"){
-          user.full_name = req.params['full_name'];
-        }
-        if(typeof req.params['email'] !== "undefined")
-          user.email = req.params['email'];
-        if(typeof req.params['password'] !== "undefined")
-          user.password = req.params['password'];
-        user.save().then(function(){});
+        u.full_name = "Gabriel Tee";
+        u.save();
+        res.json(u);
       })
        .catch(function(err){
           res.json({message: err.message});
