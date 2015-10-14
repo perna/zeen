@@ -1,0 +1,19 @@
+<div class="col-sm-6" ng-controller="CheckinController">
+    <form ng-submit="">
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" id="name" placeholder="" name="full_name" ng-model="">
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" class="form-control" id="email" placeholder="" name="email" ng-model="">
+        </div>
+        <div class="form-group">
+            <label for="">Senha</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" ng-model="user.password">
+        </div>
+        <div class="form-group text-right"></div>
+        <input type="submit" class="btn btn-default" value="criar">
+</form>
+    </form>    
+</div>
