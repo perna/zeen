@@ -7,13 +7,6 @@ app.config(function($routeProvider) {
         .when('/home', {
             templateUrl: 'partials/home.html'
         })
-        .when('/hello', {
-            templateUrl: 'partials/hello.html',
-            controller:'HelloController'
-        })
-        .when('/map', {
-            templateUrl:'partials/map.html'
-        })
         .when('/users/', {
             templateUrl: 'partials/users/list.html',
             controller:'UserController'
@@ -21,6 +14,14 @@ app.config(function($routeProvider) {
         .when('/users/add', {
             templateUrl: 'partials/users/add.html',
             controller:'UserController'
+        })
+        .when('/checkin/add', {
+            templateUrl: 'partials/checkin/add.html',
+            controller:'CheckinController'
+        })
+        .when('/points/add', {
+            templateUrl: 'partials/points/search.html',
+            controller:'CheckinController'
         })
         .otherwise({
             redirectTo:'/home'
@@ -48,4 +49,13 @@ app.controller('UserController', function($scope, $http, $location){
             })
     }
 
+});
+
+app.controller('CheckinController', function($scope, $http) {
+    console.log('Checkin Controller');
+});
+
+
+app.controller('PointsController', function($scope, $http){
+    console.log('Points Controller');
 });

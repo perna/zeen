@@ -12,15 +12,16 @@ module.exports = function(sequelize, DataTypes) {
   			isAlpha: true
   		}
   	},
-
-  	location:{
-  		type:DataTypes.STRING(20),
-  		allowNull: false,
-  		validate:{
-  			isAlpha: true
-  		}
-  	}
-  
+    
+  	location: DataTypes.GEOMETRY('Point'),
+   
+    category_id:{
+      type:DataTypes.INTEGER,
+      references: {
+        model: "category_point",
+        key:"id"
+      }
+    }
   },
 
   {

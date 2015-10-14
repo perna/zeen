@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var PointController = require('../controllers/PointController');
 
-router.get('/', PointController.index);
+router.get('/', PointController.listPoints);
+router.post('/', PointController.createPoint);
 router.get('/categories', PointController.listCategories);
 router.post('/categories', PointController.createCategory);
 
