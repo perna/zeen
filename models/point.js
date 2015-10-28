@@ -7,13 +7,16 @@ module.exports = function(sequelize, DataTypes) {
   	description:{
   		type: DataTypes.STRING(60),
   		allowNull: false,
-  		unique: true,
   		validade:{
   			isAlpha: true
   		}
   	},
     
-  	location: DataTypes.GEOMETRY('Point'),
+  	location: {
+      type:DataTypes.GEOMETRY(),
+      allowNull:false,
+      unique: true
+    },
    
     category_id:{
       type:DataTypes.INTEGER,
@@ -30,6 +33,13 @@ module.exports = function(sequelize, DataTypes) {
   			Point.hasMany(models.Checkin);
   		}
   	},
+
+    instanceMethods:{
+      findByLocation: function(coord){
+
+      } 
+    },
+
   	paranoid: true,
     freezeTableName: true,
     tableName: 'point',
@@ -39,3 +49,16 @@ module.exports = function(sequelize, DataTypes) {
   return Point;
 };
 
+/*
+sequelize.query('SELECT * FROM projects WHERE status = ?',
+  { replacements: ['active'], type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})
+
+sequelize.query('SELECT * FROM projects WHERE status = :status ',
+  { replacements: { status: 'active' }, type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})
+*/

@@ -20,12 +20,12 @@ exports.listPoints = function(req, res) {
 exports.createPoint = function(req, res) {
     
     var point = models.Point;
-    var loc = { type: 'Point', coordinates: req.body.location };
- 
+    var data  = { type: 'Point', coordinates: JSON.parse(req.body.location) };
+    
     point.create({
             description: req.body.description,
-            category: req.body.category,
-            location: loc
+            category_id: req.body.category,
+            location: data
         })
         .then(function(pt){
             res.json({id: pt.id});
@@ -33,6 +33,10 @@ exports.createPoint = function(req, res) {
         .error(function(err){
             res.json({message: err.message});
         });
+};
+
+exports.findPointByLocation = function(req, res) {
+
 };
 
 

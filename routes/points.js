@@ -4,6 +4,7 @@ var PointController = require('../controllers/PointController');
 
 router.get('/', PointController.listPoints);
 router.post('/', PointController.createPoint);
+router.get('/location/:latitude/:longitude', PointController.findPointByLocation);
 router.get('/categories', PointController.listCategories);
 router.post('/categories', PointController.createCategory);
 
