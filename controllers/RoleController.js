@@ -28,3 +28,16 @@ exports.createRole = function(req, res, next) {
             res.json({message: err.message});
         });
 };
+
+exports.updateRole = function(req, res, next) {
+    role
+        .findById(req.params['id'])
+        .then(function(roles){
+            roles.name = req.body.name;
+            roles.save();
+            res.json({message:'sucesso'});
+        })
+        .catch(function(err){
+              res.json({message: err.message});
+        });
+};
