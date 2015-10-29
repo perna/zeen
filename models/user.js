@@ -9,8 +9,8 @@ module.exports = function(sequelize, DataTypes) {
   	full_name:{
   		type: DataTypes.STRING(60),
   		allowNull: false,
-  		validade:{
-  			isAlpha: true
+  		validate:{
+  			notEmpty: true
   		}
   	},
 

@@ -79,6 +79,8 @@
                         <li><a href="#works">Work</a></li>
                         <li><a href="#team">Team</a></li>
                         <li><a href="http://google.com">Contact</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#modal_cadastro">Cadastre-se</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#modal_login">Entrar</a></li>
                     </ul>
                 </nav>
 				<!-- /main nav -->
@@ -725,5 +727,65 @@
 				});
 			});
 		</script>
+		<script type="text/javascript" src="assets/landingpage/js/login.js"></script>
+		<!-- Modal Cadastro -->
+		<div class="modal fade" id="modal_cadastro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Cadastre-se!</h4>
+			      </div>
+			      <form id="form_cadastro" method="post">
+			      <div class="modal-body">
+		        	<div class="form-group">
+						<label for="cad-nome">Nome Completo:</label>
+						<input type="text" name="full_name" class="form-control" id="cad-nome" placeholder="Ex. João Carlos Silva" required>
+						</div>
+						<div class="form-group">
+						<label for="cad-email">Email:</label>
+						<input type="email" name="email" class="form-control" id="cad-nome" placeholder="Ex. João Carlos Silva" required>
+						</div>
+						<div class="form-group">
+						<label for="cad-email">Senha:</label>
+						<input type="password" name="password" class="form-control" id="cad-nome" placeholder="Ex. João Carlos Silva" required>
+						</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
+			        <button id="btn_form_cadastro" type="button" class="btn btn-primary">cadastrar</button>
+			      </div>
+			      </form>
+    			</div>
+  			</div>
+		</div>
+		<!-- modal cadastro -->
+		<!-- Modal -->
+		<div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Entrar</h4>
+			      </div>
+			      <form id="form_login" method="post">
+			      <div class="modal-body">
+						<div class="form-group">
+							<label for="cad-email">Email:</label>
+							<input type="email" name="email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label for="cad-email">Senha:</label>
+							<input type="password" name="password" class="form-control" required>
+						</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
+			        <button id="btn_form_cadastro" type="button" class="btn btn-primary">cadastrar</button>
+			      </div>
+			      </form>
+    			</div>
+  			</div>
+		</div>
     </body>
 </html>

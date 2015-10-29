@@ -20,12 +20,13 @@ exports.listUsers = function(req, res, next) {
 };
 
 exports.createUser = function(req, res, next) {
+  console.log(req.body);
+  console.log(req.params);
   User
     .create({
         full_name:req.body.full_name,
         email: req.body.email,
-        password: req.body.password,
-        role_id: req.body.role_id
+        password: req.body.password
     })
     .then(function(user){
         res.json(user);
