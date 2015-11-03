@@ -12,7 +12,8 @@ exports.listUsers = function(req, res, next) {
       }
     })
     .then(function(users){
-        res.json(users);
+        var data = JSON.stringify({id:users.id, full_name: users.full_name, email: users.email});
+        res.json(data);
     })
     .error(function(err){
       res.json({message: err.message});
