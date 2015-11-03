@@ -7,8 +7,8 @@ module.exports = function(sequelize, DataTypes) {
   	description:{
   		type: DataTypes.STRING(60),
   		allowNull: false,
-  		validade:{
-  			isAlpha: true
+  		validate:{
+  			notEmpty: true
   		}
   	},
     
@@ -16,14 +16,6 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.GEOMETRY(),
       allowNull:false,
       unique: true
-    },
-   
-    category_id:{
-      type:DataTypes.INTEGER,
-      references: {
-        model: "category_point",
-        key:"id"
-      }
     }
   },
 
@@ -35,9 +27,10 @@ module.exports = function(sequelize, DataTypes) {
   	},
 
     instanceMethods:{
-      findByLocation: function(coord){
-
+       findByLocation: function(geom){
+        return sequelize.query('SELECT id, description, ST_AsGeoJSON(location) FROM point WHERE ST_DWithin(location, ST_GeomFromGeoJSON(\'{\"type\":\"Point\", \"coordinates\":'+geom+'}\'), 1000.00)', { type: sequelize.QueryTypes.SELECT});
       } 
+
     },
 
   	paranoid: true,
@@ -48,17 +41,3 @@ module.exports = function(sequelize, DataTypes) {
 
   return Point;
 };
-
-/*
-sequelize.query('SELECT * FROM projects WHERE status = ?',
-  { replacements: ['active'], type: sequelize.QueryTypes.SELECT }
-).then(function(projects) {
-  console.log(projects)
-})
-
-sequelize.query('SELECT * FROM projects WHERE status = :status ',
-  { replacements: { status: 'active' }, type: sequelize.QueryTypes.SELECT }
-).then(function(projects) {
-  console.log(projects)
-})
-*/

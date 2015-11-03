@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
 
   var Checkin = sequelize.define('Checkin', {
 
-    stars:{
+    score:{
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 3,
@@ -13,21 +13,14 @@ module.exports = function(sequelize, DataTypes) {
         min:1,
         max:5
       }
-    },
- 
-    comment:{
-      type: DataTypes.TEXT,
-      allowNull: true,
-      validate:{
-        isApha: true
-      }
     }
-  },
-
+  },  
+ 
   {
     classMethods: {
       associate:function(models){
-        Checkin.belongsToMany(models.User, {through:'user_checkin'});
+        Checkin.belongsTo(models.User);
+        Checkin.belongsTo(models.Point);
       }
     },
 

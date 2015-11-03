@@ -2,16 +2,28 @@
 
 var models = require('../models/');
 
-exports.listPoints = function(req, res) {
+exports.listComments= function(req, res) {
 
-    var points = models.Point;
+    var point = models.Point;
+    var comments = models.Comment;
+
+    comments.findAll({
+            include: [ User ] },
+            where:{point_id: req.params['id']}
+        })
+        .then(function(result){
+            res.json(result);
+        })
+        .error(function(err){
+            res.json({message: err.message});
+        });
 
     points.findAll()
         .then(function(pts) {
-            res.status(200).json(pts);
+            res.json(pts);
         })
         .error(function(err){
-            res.status(500).json({message: err.message});
+            res.json({message: err.message});
         });
 
 };
@@ -24,28 +36,18 @@ exports.createPoint = function(req, res) {
     
     point.create({
             description: req.body.description,
-            category_point_id: req.body.category,
+            category_id: req.body.category,
             location: data
         })
         .then(function(pt){
-            res.status(200).json({id: pt.id});
+            res.json({id: pt.id});
         })
         .error(function(err){
             res.json({message: err.message});
         });
 };
 
-exports.findPointsByLocation = function(req, res) {
-
-    var point = models.Point.build({});
-    var data = { type: 'Point', coordinates: [39.807222,-76.654723] };
-    var geom = '['+ req.params['latitude']+ ','+ req.params['longitude']+']';
-    
-
-    point.findByLocation(geom)
-        .then(function(data){
-            res.json(data);
-        });
+exports.findPointByLocation = function(req, res) {
 
 };
 

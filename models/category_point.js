@@ -15,6 +15,12 @@ module.exports = function(sequelize, DataTypes) {
   },
 
  {
+    classMethods: {
+      associate:function(models){
+       CategoryPoint.hasMany(models.Point);
+      }
+    },
+
     paranoid: true,
     freezeTableName: true,
     tableName: 'category_point',
