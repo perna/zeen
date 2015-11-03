@@ -7,13 +7,10 @@ exports.listUsers = function(req, res, next) {
   
   User
     .findAll({
-      where: {
-        deleted_at: null
-      }
+      attributes:['id','full_name','email']
     })
     .then(function(users){
-        var data = JSON.stringify({id:users.id, full_name: users.full_name, email: users.email});
-        res.json(data);
+        res.json(users);
     })
     .error(function(err){
       res.json({message: err.message});
@@ -21,8 +18,6 @@ exports.listUsers = function(req, res, next) {
 };
 
 exports.createUser = function(req, res, next) {
-  console.log(req.body);
-  console.log(req.params);
   User
     .create({
         full_name:req.body.full_name,
