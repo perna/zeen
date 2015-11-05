@@ -52,7 +52,7 @@ Zeen.Geolocation = (function(){
                 });
 
                 map.setCenter(pos);
-                populateMapPoints(pos.lat, pos.lng);
+                populateMapPoints(position.coords.latitude, position.coords.longitude);
             });
         }       
     }
@@ -79,8 +79,6 @@ Zeen.Geolocation = (function(){
             $.each(data, function(key, val){
                 var point = JSON.parse(val.location);
                 //console.log("point " + point.coordinates[0]);
-                console.log(typeof(point.coordinates[0]));
-                console.log(val.description);
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(point.coordinates[0], point.coordinates[1]),
                     map: map,
