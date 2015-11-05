@@ -5,8 +5,9 @@ var models = require('../models/');
 exports.listPoints = function(req, res) {
 
     var points = models.Point;
+    var category = models.CategoryPoint;
 
-    points.findAll()
+    points.findAll({include:[{all:true}]})
         .then(function(pts) {
             res.status(200).json(pts);
         })
@@ -20,7 +21,13 @@ exports.listPoints = function(req, res) {
 exports.createPoint = function(req, res) {
     
     var point = models.Point;
-    var data  = { type: 'Point', coordinates: JSON.parse(req.body.location) };
+    var lat = req.body.latitude;
+    var lng = req.body.longitude;
+    var location = [];
+    location.push(lat);
+    location.push(lng);
+
+    var data  = { type: 'Point', coordinates: location };
     
     point.create({
             description: req.body.description,

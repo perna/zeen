@@ -9,8 +9,8 @@ var compression = require('compression')
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var points = require('./routes/points');
-var auth = require('./routes/auth');
-var roles = require('./routes/roles');
+//ar auth = require('./routes/auth');
+//var roles = require('./routes/roles');
 
 var app = express();
 
@@ -32,8 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/points', points);
-app.use('/api/auth', auth);
-app.use('/api/roles', roles);
+//app.use('/api/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

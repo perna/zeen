@@ -4,51 +4,109 @@ var Zeen = Zeen || {};
 
 Zeen.Geolocation = (function(){
 
-    L.mapbox.accessToken = 'pk.eyJ1IjoicGVybmEiLCJhIjoiY2lnMjdqZWMwMTkxbnQ1bTNkc3JraW5keSJ9.qKes84mgNe5PTEUGe47-ww';
-    var map = '';
+    var map;
+    var latGlobal;
+    var lngGlobal;
 
     function init() {
         initMap();
-        updatePoints(-22.227855,-49.964857);  
+        bindEvents();
     }
 
+    function bindEvents() {
 
-    function initMap(){
-        navigator.geolocation.getCurrentPosition(function(pos) {
+        google.maps.event.addListener(map, 'click', function (e) {
+            latGlobal = e.latLng.lat();
+            lngGlobal = e.latLng.lng();
 
-            var geom = []
-
-            geom.push(pos.coords.latitude);
-            geom.push(pos.coords.longitude);
-
-            map = L.mapbox.map('map', 'perna.cig27jd2218wvtxkx3fqahozu').setView(geom, 14);
-            
-            addPoint(geom);
+            console.log(latGlobal);
+            console.log(lngGlobal);
+            $('#latitude_input_form').val(latGlobal);
+            $('#longitude_input_form').val(lngGlobal);
 
         });
+
+        $('#btn_add_point').on('click', addPoint);
+
     }
 
-    function addPoint(geom) {
-       L.marker(geom).addTo(map);
+    function initMap(){
+    
+        map = new google.maps.Map(document.getElementById('map'),{
+            center: {lat: -22.227855,lng:-49.964857},
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoom:15
+        });
+
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat:position.coords.latitude,
+                    lng:position.coords.longitude
+                }
+
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    title: "Você está aqui"
+                });
+
+                map.setCenter(pos);
+                populateMapPoints(pos.lat, pos.lng);
+            });
+        }       
     }
 
-    function updatePoints(latitude, longitude){
+    function addPoint() {
+        console.log('addpoint');
+
+        $.post('/api/points', $("#form_add_point").serialize())
+            .done(function(data){
+                $('#alert_form_add_point').html('Ponto adicionado com sucesso!');
+            })
+            .fail(function(err){
+                alert('error' + err);
+            });
+    }
+
+    function populateMapPoints(latitude, longitude){
+        
+        var infowindow = new google.maps.InfoWindow();
+
         var url = 'api/points/location/'+latitude+'/'+longitude;
         
         $.getJSON(url, function(data){
             $.each(data, function(key, val){
-                var point = JSON.parse(val.st_asgeojson);
-                addPoint(point['coordinates']);
+                var point = JSON.parse(val.location);
+                //console.log("point " + point.coordinates[0]);
+                console.log(typeof(point.coordinates[0]));
+                console.log(val.description);
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(point.coordinates[0], point.coordinates[1]),
+                    map: map,
+                    title: val.description
+                });
 
+                marker.info = new google.maps.InfoWindow({
+                    content: '<strong>'+ val.description +'<strong>' + '<br>'
+                });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    marker.info.open(map, marker);
+                });            
             });  
         });
       
     }
 
 
+    function fillCoordinatesFields(){
+        
+    }
+
+
     return{
         init:init,
-        updatePoints:updatePoints
     }
 
 })();

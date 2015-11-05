@@ -8,7 +8,7 @@ exports.listComments= function(req, res) {
     var comments = models.Comment;
 
     comments.findAll({
-            include: [ User ] },
+            include: [ User ],
             where:{point_id: req.params['id']}
         })
         .then(function(result){

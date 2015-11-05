@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>  
   <meta charset="utf-8" />
-  <title>Scale | Web Application</title>
+  <title>Zeen | Dashboard</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
   <link rel="stylesheet" href="assets/dashboard/css/bootstrap.css" type="text/css" />
@@ -13,9 +13,10 @@
   <link rel="stylesheet" href="assets/dashboard/css/app.css" type="text/css" />  
   <link rel="stylesheet" href="assets/dashboard/js/calendar/bootstrap_calendar.css" type="text/css" />
   
+  <!--
   <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+  -->
   <link rel="stylesheet" href="assets/dashboard/css/dashboard.css" type="text/css" />  
-  
   <!--
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -937,7 +938,53 @@
                     </div>
                   </div>-->
                   <div class="row bg-light dk m-b">
-                    <div id="map" class="col-md-12">
+                    <div class="col-md-4">
+                      <div class="panel panel-primary">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Adicione um novo ponto</h3>
+                        </div>
+                          <div class="panel-body">
+                            <div id="alert_form_add_point" class="alert alert-success hidden">
+                              
+                            </div>
+                            <form id="form_add_point">
+                              <div class="form-group">
+                                <label for="descricao">Descrição:</label>
+                                <input type="text" class="form-control" name="description">
+                              </div>
+                              <div class="form-group">
+                                <label for="descricao">Categoria:</label>
+                                  <select name="category_point_id" class="form-control">
+                                    <option value="1">Valor 1</option> 
+                                    <option value="valor2" selected>Valor 2</option>
+                                    <option value="valor3">Valor 3</option>
+                                  </select>
+                              </div>
+                              <span class="glyphicon glyphicon-map-marker" aria-hidden="true">clique no mapa para capturar o ponto</span>
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label for="descricao">Latitude:</label>
+                                    <input type="text" id="latitude_input_form" class="form-control" name="latitude" readonly />
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="descricao">Longitude:</label>
+                                    <input type="text" id="longitude_input_form" class="form-control" name="longitude" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-offset-6 col-md-6 text-right">
+                                    <button id="btn_add_point" class="btn btn-primary" type="button">Adicionar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                      </div>
+                    </div>
+                    <div id="map" class="col-md-8">
                       
                     </div>
                   </div>
@@ -1076,9 +1123,12 @@
   <script src="js/sortable/jquery.sortable.js"></script>
   <script src="js/app.plugin.js"></script>
 -->
-<script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
-
+<!--<script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>-->
+   <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVsvd5tI2l8mu3TCS0B53dhksfzIrfi7k&callback=Zeen.Geolocation.init">
+    </script>
   <script type="text/javascript" src="assets/dashboard/js/modules/geolocation.js"></script>
-   <script type="text/javascript" src="assets/dashboard/js/modules/main.js"></script>
+  <script type="text/javascript" src="assets/dashboard/js/modules/main.js"></script>
 </body>
 </html>
+
