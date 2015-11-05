@@ -35,7 +35,7 @@ Zeen.Geolocation = (function(){
         map = new google.maps.Map(document.getElementById('map'),{
             center: {lat: -22.227855,lng:-49.964857},
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            zoom:12
+            zoom:14
         });
 
         if(navigator.geolocation) {
