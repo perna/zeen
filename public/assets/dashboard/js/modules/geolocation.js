@@ -18,6 +18,7 @@ Zeen.Geolocation = (function(){
         google.maps.event.addListener(map, 'click', function (e) {
             latGlobal = e.latLng.lat();
             lngGlobal = e.latLng.lng();
+            addMarker(e.latLng);
 
             console.log(latGlobal);
             console.log(lngGlobal);
@@ -98,9 +99,13 @@ Zeen.Geolocation = (function(){
     }
 
 
-    function fillCoordinatesFields(){
-        
-    }
+    function addMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            draggable:true,
+            map: map
+    });
+}
 
 
     return{
