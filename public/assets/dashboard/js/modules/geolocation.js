@@ -29,6 +29,12 @@ Zeen.Geolocation = (function(){
 
         $('#btn_add_point').on('click', addPoint);
 
+        google.maps.event.addListener(map, 'dragend', function() { 
+            var center = map.getCenter();
+            console.log(center.lat());
+            populateMapPoints(center.lat(),center.lng());
+        });
+
     }
 
     function initMap(){
