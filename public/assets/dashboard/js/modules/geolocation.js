@@ -33,7 +33,7 @@ Zeen.Geolocation = (function(){
     function initMap(){
     
         map = new google.maps.Map(document.getElementById('map'),{
-            center: {lat: -22.227855,lng:-49.964857},
+            /*center: {lat: -22.227855,lng:-49.964857},*/
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             zoom:14
         });
@@ -50,11 +50,10 @@ Zeen.Geolocation = (function(){
                     map: map,
                     title: "Você está aqui"
                 });
-
                 map.setCenter(pos);
-                populateMapPoints(position.coords.latitude, position.coords.longitude);
+                populateMapPoints(pos.lat, pos.lng);
             });
-        }       
+        }
     }
 
     function addPoint() {
@@ -78,7 +77,8 @@ Zeen.Geolocation = (function(){
         $.getJSON(url, function(data){
             $.each(data, function(key, val){
                 var point = JSON.parse(val.location);
-                //console.log("point " + point.coordinates[0]);
+                //console.log("point " + point.description);
+                console.log(val.description);
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(point.coordinates[0], point.coordinates[1]),
                     map: map,
