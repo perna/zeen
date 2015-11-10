@@ -17,6 +17,13 @@ exports.listUsers = function(req, res, next) {
     });
 };
 
+exports.findUser = function(req, res) {
+  User.findById(req.params['id'],{attributes:['id','full_name','email']})
+    .then(function(user){
+      res.json(user);
+    });
+};
+
 exports.createUser = function(req, res, next) {
   User
     .create({
