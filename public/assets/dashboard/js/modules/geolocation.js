@@ -64,10 +64,10 @@ Zeen.Geolocation = (function(){
     }
 
     function addPoint() {
-        console.log('addpoint');
 
         $.post('/api/points', $("#form_add_point").serialize())
             .done(function(data){
+                $('.alert-point-form').show();
                 $('#alert_form_add_point').html('Ponto adicionado com sucesso!');
             })
             .fail(function(err){
